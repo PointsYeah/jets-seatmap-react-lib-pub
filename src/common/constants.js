@@ -1,19 +1,19 @@
 import {
-  LOCALE_EN,
-  LOCALE_RU,
-  LOCALE_CN,
-  LOCALE_DE,
-  LOCALE_ES,
-  LOCALE_PL,
-  LOCALE_AR,
-  LOCALE_FR,
-  LOCALE_CS,
-  LOCALE_PT,
-  LOCALE_IT,
-  LOCALE_UK,
-  LOCALE_JA,
-  LOCALE_KO,
-  LOCALE_TR,
+    LOCALE_AR,
+    LOCALE_CN,
+    LOCALE_CS,
+    LOCALE_DE,
+    LOCALE_EN,
+    LOCALE_ES,
+    LOCALE_FR,
+    LOCALE_IT,
+    LOCALE_JA,
+    LOCALE_KO,
+    LOCALE_PL,
+    LOCALE_PT,
+    LOCALE_RU,
+    LOCALE_TR,
+    LOCALE_UK,
 } from './i18n.languages';
 
 export const SCALE_TYPES = {
@@ -222,7 +222,7 @@ export const THEME_FUSELAGE_WINDOWS_COLOR = 'darkgrey';
 export const THEME_FUSELAGE_WINGS_COLOR = 'darkgrey';
 
 export const THEME_DEFAULT_PASSENGER_BADGE_COLOR = '#1157ce';
-export const THEME_DEFAULT_FONT_FAMILY = 'Montserrat, sans-serif';
+export const THEME_DEFAULT_FONT_FAMILY = ''//'Montserrat, sans-serif';
 
 export const THEME_TOOLTIP_BACKGROUND_COLOR = 'rgb(255,255,255)';
 export const THEME_TOOLTIP_HEADER_COLOR = '#4f6f8f';
@@ -237,7 +237,7 @@ export const THEME_TOOLTIP_SELECT_BUTTON_BACKGROUND_COLOR = 'rgb(0, 122, 255)';
 export const THEME_TOOLTIP_CANCEL_BUTTON_TEXT_COLOR = 'rgb(0, 24, 51)';
 export const THEME_TOOLTIP_CANCEL_BUTTON_BACKGROUND_COLOR = 'rgb(237, 240, 243)';
 
-export const THEME_DECK_SELECTOR_FILL_COLOR = '#fff';
+export const THEME_DECK_SELECTOR_FILL_COLOR = '#f2f2f2';
 export const THEME_DECK_SELECTOR_STROKE_COLOR = 'rgba(50, 50, 50, 0.5)';
 export const THEME_DECK_SELECTOR_SIZE = 25;
 

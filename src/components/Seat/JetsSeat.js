@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { JetsContext, ENTITY_TYPE_MAP } from '../../common';
+import { ENTITY_TYPE_MAP, JetsContext } from '../../common';
 import { SeatIcon } from './ui/SeatIcon';
 import { SeatPriceLabel } from './ui/SeatPriceLabel';
 
@@ -54,7 +54,7 @@ export const JetsSeat = ({ data }) => {
 
   let rtlStyle = '';
   if (params?.isHorizontal && (type === aisle || type === index)) {
-    rtlStyle = params.rightToLeft ? '' : 'rotate(180deg)';
+    rtlStyle = params?.rightToLeft ? '' : 'rotate(180deg)';
   }
 
   const style = {

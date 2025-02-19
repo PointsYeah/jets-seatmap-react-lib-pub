@@ -22,6 +22,9 @@ const CONFIG_MOCK = {
   apiAppId: process.env.JETS_APP_ID,
   apiKey: process.env.JETS_PRIVATE_KEY,
 
+  // apiUrl:'https://sandbox.quicket.io/api/v1.1',
+  // apiAppId:'2446185be0b982b730150-pointsyeah-com',
+  // apiKey:'647e9838d910cef17f38a-pointsyeah-com',
   scaleType: 'zoom',
 
   visibleSeatPriceLabels: false,
@@ -48,7 +51,7 @@ const CONFIG_MOCK = {
     bulkIconColor: 'darkslategray',
 
     defaultPassengerBadgeColor: 'darkred',
-    fontFamily: 'Montserrat, sans-serif',
+    // fontFamily: 'Montserrat, sans-serif',
 
     tooltipBackgroundColor: 'rgb(255,255,255)',
     tooltipHeaderColor: '#4f6f8f',

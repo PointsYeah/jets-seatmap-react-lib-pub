@@ -1,12 +1,12 @@
 import {
+  DEFAULT_SEAT_PASSENGER_TYPES,
   ENTITY_STATUS_MAP,
   ENTITY_TYPE_MAP,
   JetsLocalStorageService,
-  DEFAULT_SEAT_PASSENGER_TYPES,
 } from '../../common';
-import { JetsSeatMapApiService } from './api';
-import { JetsContentPreparer } from '../../common/data-preparer';
 import { JetsDataHelper } from '../../common/data-helper';
+import { JetsContentPreparer } from '../../common/data-preparer';
+import { JetsSeatMapApiService } from './api';
 
 export class JetsSeatMapService {
   constructor(configuration) {
@@ -19,7 +19,7 @@ export class JetsSeatMapService {
     this._configuration = configuration;
   }
 
-  getSeatMapData = async (flight, availability, passengers, config) => {
+  getSeatMapData = async (flight, availability, passengers, config, includedCabins) => {
     const { lang, units } = config;
     const planeFeatures = await this._api.getPlaneFeatures(flight, lang, units);
 
@@ -30,7 +30,14 @@ export class JetsSeatMapService {
     const activePassenger = passengers?.find(item => item.seat?.seatLabel);
     if (passengers && activePassenger) content = this.setPassengersHandler(content, passengers);
 
-    return { content, params, exits, bulks, availabilityData: planeFeatures?.availabilityData };
+    return {
+      content,
+      params,
+      exits,
+      bulks,
+      availabilityData: planeFeatures?.availabilityData,
+      planFeatures: planeFeatures,
+    };
   };
 
   selectSeatHandler = (content, seat, passengersList) => {

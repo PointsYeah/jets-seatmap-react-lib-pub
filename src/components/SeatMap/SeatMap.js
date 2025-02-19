@@ -1,72 +1,72 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
-import { JetsSeatMapService } from './service';
 import { JetsDataHelper } from '../../common/data-helper';
+import { JetsSeatMapService } from './service';
 
 import {
-  DEFAULT_LANG,
-  DEFAULT_SEAT_MAP_WIDTH,
-  DEFAULT_HORIZONTAL_LAYOUT,
-  DEFAULT_VISIBLE_HULL,
-  DEFAULT_VISIBLE_WINGS,
-  DEFAULT_VISIBLE_CABIN_TITLES,
+  DEFAULT_AUTHORIZATION_SCHEME,
   DEFAULT_BUILT_IN_TOOLTIP,
   DEFAULT_EXTERNAL_PASSENGER_MANAGEMENT,
+  DEFAULT_HORIZONTAL_LAYOUT,
+  DEFAULT_LANG,
+  DEFAULT_RTL,
+  DEFAULT_SCALE_TYPE,
+  DEFAULT_SEAT_MAP_WIDTH,
   DEFAULT_SHOW_DECK_SELECTOR,
   DEFAULT_SINGLE_DECK_MODE,
   DEFAULT_TOOLTIP_ON_HOVER,
-  DEFAULT_RTL,
   DEFAULT_UNITS,
-  DEFAULT_SCALE_TYPE,
-  DEFAULT_AUTHORIZATION_SCHEME,
-  SCALE_TYPES,
-  JetsContext,
+  DEFAULT_VISIBLE_CABIN_TITLES,
+  DEFAULT_VISIBLE_HULL,
+  DEFAULT_VISIBLE_WINGS,
   ENTITY_STATUS_MAP,
   ENTITY_TYPE_MAP,
+  JetsContext,
+  SCALE_TYPES,
   THEME_BACKGROUND_COLOR,
-  THEME_DECK_LABEL_TITLE_COLOR,
-  THEME_FLOOR_COLOR,
-  THEME_SEAT_LABEL_COLOR,
-  THEME_SEAT_STROKE_COLOR,
-  THEME_SEAT_STROKE_WIDTH,
-  THEME_SEAT_ARMREST_COLOR,
   THEME_BULK_BASE_COLOR,
   THEME_BULK_CUT_COLOR,
   THEME_BULK_ICON_COLOR,
-  THEME_DEFAULT_PASSENGER_BADGE_COLOR,
-  THEME_DEFAULT_FONT_FAMILY,
-  THEME_DECK_HEIGHT_SPACING,
-  THEME_WINGS_WIDTH,
-  THEME_DECK_SEPARATION,
-  THEME_TOOLTIP_BACKGROUND_COLOR,
-  THEME_TOOLTIP_BORDER_COLOR,
-  THEME_TOOLTIP_FONT_COLOR,
-  THEME_TOOLTIP_ICON_COLOR,
-  THEME_TOOLTIP_ICON_BORDER_COLOR,
-  THEME_TOOLTIP_ICON_BACKGROUND_COLOR,
-  THEME_TOOLTIP_HEADER_COLOR,
-  THEME_TOOLTIP_SELECT_BUTTON_TEXT_COLOR,
-  THEME_TOOLTIP_SELECT_BUTTON_BACKGROUND_COLOR,
-  THEME_TOOLTIP_CANCEL_BUTTON_TEXT_COLOR,
-  THEME_TOOLTIP_CANCEL_BUTTON_BACKGROUND_COLOR,
-  THEME_FUSELAGE_FILL_COLOR,
-  THEME_FUSELAGE_OUTLINE_COLOR,
-  THEME_FUSELAGE_WINDOWS_COLOR,
-  THEME_FUSELAGE_WINGS_COLOR,
-  THEME_DECK_SELECTOR_FILL_COLOR,
-  THEME_DECK_SELECTOR_STROKE_COLOR,
-  THEME_DECK_SELECTOR_SIZE,
-  THEME_FUSELAGE_OUTLINE_WIDTH,
-  THEME_NOT_AVAILABLE_SEATS_COLOR,
-  THEME_CABIN_TITLES_WIDTH,
   THEME_CABIN_TITLES_HIGHLIGHT_COLORS,
   THEME_CABIN_TITLES_LABEL_COLOR,
+  THEME_CABIN_TITLES_WIDTH,
+  THEME_DECK_HEIGHT_SPACING,
+  THEME_DECK_LABEL_TITLE_COLOR,
+  THEME_DECK_SELECTOR_FILL_COLOR,
+  THEME_DECK_SELECTOR_SIZE,
+  THEME_DECK_SELECTOR_STROKE_COLOR,
+  THEME_DECK_SEPARATION,
+  THEME_DEFAULT_FONT_FAMILY,
+  THEME_DEFAULT_PASSENGER_BADGE_COLOR,
+  THEME_FLOOR_COLOR,
+  THEME_FUSELAGE_FILL_COLOR,
+  THEME_FUSELAGE_OUTLINE_COLOR,
+  THEME_FUSELAGE_OUTLINE_WIDTH,
+  THEME_FUSELAGE_WINDOWS_COLOR,
+  THEME_FUSELAGE_WINGS_COLOR,
+  THEME_NOT_AVAILABLE_SEATS_COLOR,
+  THEME_SEAT_ARMREST_COLOR,
+  THEME_SEAT_LABEL_COLOR,
+  THEME_SEAT_STROKE_COLOR,
+  THEME_SEAT_STROKE_WIDTH,
+  THEME_TOOLTIP_BACKGROUND_COLOR,
+  THEME_TOOLTIP_BORDER_COLOR,
+  THEME_TOOLTIP_CANCEL_BUTTON_BACKGROUND_COLOR,
+  THEME_TOOLTIP_CANCEL_BUTTON_TEXT_COLOR,
+  THEME_TOOLTIP_FONT_COLOR,
+  THEME_TOOLTIP_HEADER_COLOR,
+  THEME_TOOLTIP_ICON_BACKGROUND_COLOR,
+  THEME_TOOLTIP_ICON_BORDER_COLOR,
+  THEME_TOOLTIP_ICON_COLOR,
+  THEME_TOOLTIP_SELECT_BUTTON_BACKGROUND_COLOR,
+  THEME_TOOLTIP_SELECT_BUTTON_TEXT_COLOR,
+  THEME_WINGS_WIDTH,
   useEnvironmentInfo,
 } from '../../common';
-import './index.css';
-import { JetsPlaneBody } from '../PlaneBody';
 import { JetsDeckSelector } from '../DeckSelector';
+import { JetsPlaneBody } from '../PlaneBody';
 import { JetsTooltipGlobal } from '../TooltipGlobal';
+import './index.css';
 
 export const JetsSeatMap = ({
   flight,
@@ -122,10 +122,18 @@ export const JetsSeatMap = ({
   useEffect(() => {
     let isMounted = true;
 
+    // reset stuff
+    setSeatMapInited(false);
+    setContent([]);
+    setPassengersList([]);
+    setParams(null);
+    setExits([]);
+    setBulks([]);
     if (flight?.id) {
       service
         .getSeatMapData(flight, availability, passengers, configuration)
         .then(data => {
+          console.log('getSeatMapData', data);
           if (isMounted) {
             setParams(data.params);
             setContent(data.content);
@@ -139,11 +147,14 @@ export const JetsSeatMap = ({
               decksCount: data.content?.length,
               currentDeckIndex: activeDeck,
               availabilityData: data?.availabilityData,
+              planFeatures: data?.planFeatures,
+              originalData: data,
             });
             hasReceivedFirstParams.current = false;
           }
         })
         .catch(err => {
+          console.error('err', err);
           if (isMounted) {
             onSeatMapInited({
               heightInPx: undefined,

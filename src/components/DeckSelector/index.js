@@ -18,6 +18,9 @@ const buttonSVG = stroke => `
 </svg>
 `;
 
+const indicatorSVG = stroke =>
+  `<svg width="24px" height="24px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>arrow-up</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="add" fill="#ffffff" transform="translate(134.255147, 106.680107)"> <polygon id="arrow-up" points="143.073067 298.639787 143.073067 81.6667733 213.32288 151.916587 243.489707 121.749973 121.739733 2.84217094e-14 0 121.749973 30.1668267 151.916587 100.4064 81.6693333 100.4064 298.639787"> </polygon> </g> </g> </g></svg>`;
+
 export const JetsDeckSelector = ({ direction }) => {
   const { params, colorTheme, switchDeck } = useContext(JetsContext);
   const elementRef = useRef(null);
@@ -25,23 +28,36 @@ export const JetsDeckSelector = ({ direction }) => {
   const { deckSelectorStrokeColor, deckSelectorFillColor, deckSelectorSize } = colorTheme;
 
   const style = {
-    transform: `rotate(${180 * Number(direction)}deg)`,
-    background: deckSelectorFillColor,
+    // transform: `rotate(${180 * Number(direction)}deg)`,
+    // background: deckSelectorFillColor,
     height: deckSelectorSize,
-    width: deckSelectorSize,
+    // width: deckSelectorSize,
     left: params?.rightToLeft ? 'auto' : 0,
     right: params?.rightToLeft ? 0 : 'auto',
   };
 
+  const indicatorStyle = {
+    transform: `rotate(${180 * Number(direction)}deg)`,
+    marginTop: direction ? '-4px' : '4px',
+  };
   return (
     <div
       className={`jets-deck-selector`}
       style={style}
       ref={elementRef}
       onClick={e => switchDeck()}
-      dangerouslySetInnerHTML={{
-        __html: buttonSVG(deckSelectorStrokeColor),
-      }}
-    ></div>
+      // dangerouslySetInnerHTML={{
+      //   __html: buttonSVG(deckSelectorStrokeColor),
+      // }}
+    >
+      <span>{direction ? 'Lower' : 'Upper'} deck</span>
+      <div
+        className="indicator"
+        style={indicatorStyle}
+        dangerouslySetInnerHTML={{
+          __html: indicatorSVG(),
+        }}
+      ></div>
+    </div>
   );
 };

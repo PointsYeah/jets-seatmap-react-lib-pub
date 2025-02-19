@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400');
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400'); */
 
 .jets-demo {
   width: 100%;
@@ -61,11 +61,11 @@
 .jets-demo--btn {
   width: 25%;
   height: 100%;
-  font-family: 'Montserrat', monospace;
+  /* font-family: 'Montserrat', monospace; */
 }
 
-a {
-  font-family: 'Montserrat', monospace;
+.jets-demo > a {
+  /* font-family: 'Montserrat', monospace; */
   padding-bottom: 15px;
 }
 

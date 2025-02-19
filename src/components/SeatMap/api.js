@@ -1,4 +1,4 @@
-import { DEFAULT_LANG, DEFAULT_UNITS, DEFAULT_AUTHORIZATION_SCHEME, JetsApiService } from '../../common';
+import { DEFAULT_AUTHORIZATION_SCHEME, DEFAULT_LANG, DEFAULT_UNITS, JetsApiService } from '../../common';
 
 const API_SUPPORTED_LANGUAGES = [
   'AR',
@@ -58,12 +58,13 @@ export class JetsSeatMapApiService extends JetsApiService {
             throw new Error(item.error);
           }
           if (flight.cabinClass && cabinClasses.includes(flight.cabinClass)) {
-            const { id, cabin, entertainment, power, wifi } = item;
+            const { id, cabin, entertainment, power, wifi,plane} = item;
             result[flight.cabinClass] = {
               cabin,
               entertainment,
               power,
               wifi,
+              plane
             };
           }
           result.seatDetails = item.seatDetails;
@@ -74,7 +75,7 @@ export class JetsSeatMapApiService extends JetsApiService {
           break;
         }
         default:
-          const { id, cabin, entertainment, power, wifi } = item;
+          const { id, cabin, entertainment, power, wifi,plane } = item;
           const cabinClass = id.split(':')[1];
           if (cabinClass && cabinClasses.includes(cabinClass)) {
             result[cabinClass] = {
@@ -82,6 +83,7 @@ export class JetsSeatMapApiService extends JetsApiService {
               entertainment,
               power,
               wifi,
+              plane
             };
           }
           break;

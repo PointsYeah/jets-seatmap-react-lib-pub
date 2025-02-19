@@ -14,3 +14,4 @@ export * from './SeatMap';
 export * from './Tail';
 export * from './TooltipGlobal';
 export * from './Wing';
+

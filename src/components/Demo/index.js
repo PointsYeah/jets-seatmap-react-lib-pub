@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { JetsButton } from '../Button';
-import { JetsSeatMap } from '../SeatMap';
-import { FLIGHT_MOCK, AVAILABILITY_MOCK, PASSENGERS_MOCK, CONFIG_MOCK } from './constants';
+// import { JetsSeatMap } from '../SeatMap';
+import { PYSeatMap } from '../SeatMap/PYSeatMap';
+import { AVAILABILITY_MOCK, CONFIG_MOCK, FLIGHT_MOCK, PASSENGERS_MOCK } from './constants';
 
 import './index.css';
+import { JetsSeatMap } from '../SeatMap/SeatMap';
 
 export const DemoComponent = () => {
   const getDefaultConfig = () => {
@@ -118,14 +120,23 @@ export const DemoComponent = () => {
         </div>
       </div>
       <div className="jets-demo--seat-map">
-        <JetsSeatMap
+        <PYSeatMap
           flight={flight}
           config={config}
           availability={availability}
           passengers={passengers}
           currentDeckIndex={deckIndex}
           seatJumpTo={seatJumpTo}
+          includedCabins={['F', 'E']}
         />
+        {/* <JetsSeatMap
+          flight={flight}
+          config={config}
+          availability={availability}
+          passengers={passengers}
+          currentDeckIndex={deckIndex}
+          seatJumpTo={seatJumpTo}
+        /> */}
       </div>
     </div>
   );

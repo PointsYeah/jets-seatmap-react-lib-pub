@@ -1,9 +1,35 @@
 .jets-deck-selector {
   position: absolute;
   height: 40px;
-  padding: 5px;
+  padding: 3px 12px 3px 15px;
+
   margin: 5px;
-  border-radius: 3px;
-  background-color: rgba(128, 128, 128, 0.5);
+  border-radius: 20px;
+  background-color: #ff7823;
+  /* background-color: rgba(128, 128, 128, 0.5); */
   z-index: 1000;
+  text-align: center;
+  color: white;
+  white-space: nowrap;
+  font-weight: bold;
+  /* vertical-align: middle; */
+  /* border: 1px solid white; */
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+.jets-deck-selector:hover {
+  opacity: 0.8;
+}
+.jets-deck-selector span {
+  vertical-align: middle;
+  self-align: center;
+}
+
+.jets-deck-selector .indicator {
+  vertical-align: middle;
+  self-align: center;
 }
