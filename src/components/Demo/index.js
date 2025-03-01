@@ -122,16 +122,22 @@ export const DemoComponent = () => {
         </div>
       </div>
       <div className="jets-demo--seat-map">
-        {/* <PYSeatMap
+        <PYSeatMap
           flight={flight}
           config={config}
           availability={availability}
           passengers={passengers}
           currentDeckIndex={deckIndex}
           seatJumpTo={seatJumpTo}
-          includedCabins={['F', 'E']}
-        /> */}
-        <JetsSeatMap
+          includedCabins={['F', 'E', 'B', 'P']}
+          // componentOverrides={{
+          //   JetsNoData: () => {
+          //     console.log('custom No Data?');
+          //     return <div>No Seatmap found</div>;
+          //   },
+          // }}
+        />
+        {/* <JetsSeatMap
           flight={flight}
           config={config}
           availability={availability}
@@ -144,7 +150,7 @@ export const DemoComponent = () => {
           //     return <div>No Seatmap found</div>;
           //   },
           // }}
-        />
+        /> */}
       </div>
     </div>
   );

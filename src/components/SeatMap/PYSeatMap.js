@@ -146,6 +146,7 @@ export const PYSeatMap = forwardRef(
           })
           .catch(err => {
             console.error('service get seatmap data error', err);
+            setSeatMapInited(true);
             if (isMounted) {
               onDataError(err);
             }
