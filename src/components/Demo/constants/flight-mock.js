@@ -118,4 +118,15 @@ const FLIGHT_MOCK10 = {
   cabinClass: 'A',
 };
 
-export default FLIGHT_MOCK;
+const FLIGHT_MOCK_ERROR = {
+  id: 'AY1362',
+  airlineCode: 'AY',
+  flightNo: '1362',
+  departureDate: '2025-03-13',
+  departure: 'MAN',
+  arrival: 'HEL',
+  cabinClass: 'B',
+};
+
+// export default FLIGHT_MOCK;
+export default FLIGHT_MOCK_ERROR;

@@ -6,6 +6,8 @@ import { AVAILABILITY_MOCK, CONFIG_MOCK, FLIGHT_MOCK, PASSENGERS_MOCK } from './
 
 import './index.css';
 import { JetsSeatMap } from '../SeatMap/SeatMap';
+import { JetsNotInit } from '../NotInit';
+import { JetsNoData } from '../NoData';
 
 export const DemoComponent = () => {
   const getDefaultConfig = () => {
@@ -120,7 +122,7 @@ export const DemoComponent = () => {
         </div>
       </div>
       <div className="jets-demo--seat-map">
-        <PYSeatMap
+        {/* <PYSeatMap
           flight={flight}
           config={config}
           availability={availability}
@@ -128,15 +130,21 @@ export const DemoComponent = () => {
           currentDeckIndex={deckIndex}
           seatJumpTo={seatJumpTo}
           includedCabins={['F', 'E']}
-        />
-        {/* <JetsSeatMap
+        /> */}
+        <JetsSeatMap
           flight={flight}
           config={config}
           availability={availability}
           passengers={passengers}
           currentDeckIndex={deckIndex}
           seatJumpTo={seatJumpTo}
-        /> */}
+          // componentOverrides={{
+          //   JetsNoData: () => {
+          //     console.log('custom No Data?');
+          //     return <div>No Seatmap found</div>;
+          //   },
+          // }}
+        />
       </div>
     </div>
   );

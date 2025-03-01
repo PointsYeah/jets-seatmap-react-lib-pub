@@ -15,6 +15,7 @@ export const JetsPlaneBody = ({ activeDeck, content, exits, bulks, isSeatMapInit
   const elementRefs = useRef(new Array());
   const ResolvedJetsNotInit = componentOverrides?.JetsNotInit ?? JetsNotInit;
 
+  const ResolvedJetsNoData = componentOverrides?.JetsNoData ?? JetsNoData;
   const { lang, visibleFuselage } = config;
 
   const {
@@ -111,7 +112,9 @@ export const JetsPlaneBody = ({ activeDeck, content, exits, bulks, isSeatMapInit
           )}
         </div>
       ) : isSeatMapInited ? (
-        <JetsNoData />
+        // <JetsNoData />
+
+        <ResolvedJetsNoData />
       ) : (
         <ResolvedJetsNotInit />
       )}

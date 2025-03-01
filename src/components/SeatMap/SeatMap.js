@@ -133,7 +133,7 @@ export const JetsSeatMap = ({
       service
         .getSeatMapData(flight, availability, passengers, configuration)
         .then(data => {
-          console.log('getSeatMapData', data);
+          // console.log('getSeatMapData', data);
           if (isMounted) {
             setParams(data.params);
             setContent(data.content);
@@ -154,6 +154,7 @@ export const JetsSeatMap = ({
           }
         })
         .catch(err => {
+          setSeatMapInited(true);
           console.error('err', err);
           if (isMounted) {
             onSeatMapInited({
